@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="theme-color" content="#0a0502"/>
+<title>PIT STOP Bar Menu — Sunrise N Resort</title>
+<meta name="description" content="Premium bar menu. See prices, choose your pour, and order with your waiter."/>
+
+<style>
+/* =============================================
+   PREMIUM LOUNGE THEME & VARIABLES
+   ============================================= */
+:root {
+  --bg-deep:       #080402;
+  --bg-glass:      rgba(255, 255, 255, 0.04);
+  --glass-border:  rgba(232, 184, 75, 0.15);
+  --glass-glow:    rgba(232, 184, 75, 0.25);
+  --gold:          #e8b84b;
+  --gold-light:    #fce49c;
+  --gold-dim:      #a88232;
+  --cream:         #f2e5d0;
+  --muted:         rgba(242, 229, 208, 0.5);
+  --font-display:  'Georgia', 'Times New Roman', serif;
+  --font-body:     -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+  --radius-card:   16px;
+  --radius-pill:   24px;
+  --transition:    0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =============================================
+   RESET & ANIMATED BACKGROUND
+   ============================================= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background-color: var(--bg-deep);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Moving Glowing Orbs for "Mast" Vibe */
+.ambient-bg {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  animation: float 15s infinite ease-in-out alternate;
+}
+.orb-1 { width: 300px; height: 300px; background: rgba(196, 101, 27, 0.2); top: -10%; left: -10%; }
+.orb-2 { width: 400px; height: 400px; background: rgba(232, 184, 75, 0.15); bottom: -20%; right: -10%; animation-delay: -5s; }
+.orb-3 { width: 250px; height: 250px; background: rgba(196, 101, 27, 0.15); top: 40%; left: 60%; animation-delay: -10s; }
+
+@keyframes float {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, 50px) scale(1.1); }
+}
+
+/* =============================================
+   HERO HEADER
+   ============================================= */
+.hero {
+  text-align: center;
+  padding: 60px 20px 40px;
+  position: relative;
+}
+.hero-emblem {
+  font-size: 48px;
+  margin-bottom: 15px;
+  filter: drop-shadow(0 0 20px var(--glass-glow));
+  animation: pulse 3s infinite alternate;
+}
+@keyframes pulse {
+  0% { filter: drop-shadow(0 0 10px var(--glass-glow)); transform: scale(1); }
+  100% { filter: drop-shadow(0 0 25px var(--gold)); transform: scale(1.05); }
+}
+.hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 8vw, 38px);
+  color: var(--gold-light);
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+}
+.hero-sub {
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 30px;
+}
+
+/* Glassmorphism Order Guide */
+.how-to-order {
+  display: inline-block;
+  background: var(--bg-glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-card);
+  padding: 16px 24px;
+  font-size: 14px;
+  color: var(--cream);
+  max-width: 340px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+.how-to-order strong { color: var(--gold); font-size: 15px; display: block; margin-bottom: 6px; letter-spacing: 1px;}
+.how-to-order em { color: var(--muted); font-size: 13px; display: block; margin-top: 8px;}
+
+/* =============================================
+   SHAYARI BLOCKS (100% SAFE & FUN)
+   ============================================= */
+.shayari {
+  text-align: center;
+  padding: 30px 20px;
+  margin: 10px 0;
+}
+.shayari-icon { color: var(--gold-dim); font-size: 18px; margin-bottom: 10px; display: block; opacity: 0.7;}
+.shayari-text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--gold-light);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+.shayari-text .line { display: block; }
+.shayari-attr {
+  margin-top: 15px;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* =============================================
+   STICKY CONTROLS (GLASS UI)
+   ============================================= */
+.controls-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(8, 4, 2, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 16px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+}
+.search-box {
+  width: 100%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-pill);
+  padding: 14px 20px 14px 46px;
+  color: var(--cream);
+  font-size: 15px;
+  transition: var(--transition);
+}
+.search-box:focus { border-color: var(--gold); background: rgba(255,255,255,0.1); outline: none; box-shadow: 0 0 15px var(--glass-glow);}
+.search-wrap { position: relative; margin-bottom: 16px; }
+.search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--gold); font-size: 18px;}
+
+/* Slick Category Pills */
+.filter-row {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 5px;
+  scrollbar-width: none;
+}
+.filter-row::-webkit-scrollbar { display: none; }
+.filter-pill {
+  flex-shrink: 0;
+  background: var(--bg-glass);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-pill);
+  padding: 8px 18px;
+  font-size: 14px;
+  color: var(--muted);
+  transition: var(--transition);
+  backdrop-filter: blur(4px);
+}
+.filter-pill.active {
+  background: linear-gradient(135deg, var(--gold), #d49c2a);
+  border-color: var(--gold);
+  color: var(--bg-deep);
+  font-weight: bold;
+  box-shadow: 0 4px 15px var(--glass-glow);
+}
+
+/* =============================================
+   MENU SECTIONS & PREMIUM CARDS
+   ============================================= */
+.menu-body { padding: 20px 0 80px; max-width: 650px; margin: 0 auto; }
+.no-results { display: none; text-align: center; padding: 50px 20px; color: var(--muted); font-size: 16px;}
+
+.section { 
+  margin: 0 15px 15px;
+  background: var(--bg-glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.section-header {
+  width: 100%;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  text-align: left;
+}
+.section-name {
+  flex: 1;
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--gold-light);
+}
+.section-arrow { 
+  color: var(--gold); 
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+  background: rgba(255,255,255,0.05);
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+}
+.section.open .section-arrow { transform: rotate(180deg); background: rgba(232, 184, 75, 0.2);}
+.section-body { 
+  display: none; 
+  padding: 0 10px 15px; 
+}
+.section.open .section-body { 
+  display: block; 
+  animation: slideDown 0.4s ease forwards;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.sub-label {
+  font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--gold-dim); padding: 15px 10px 8px; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 10px;
+}
+
+/* Glass Cards */
+.item-card {
+  display: flex;
+  padding: 16px;
+  margin: 0 5px 10px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.03);
+  transition: var(--transition);
+}
+.item-card:active { background: rgba(232, 184, 75, 0.1); border-color: var(--gold-dim); }
+.item-info { flex: 1; }
+.item-name {
+  font-family: var(--font-display);
+  font-size: 17px;
+  color: var(--cream);
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+/* Glowing Price Chips */
+.prices { display: flex; flex-wrap: wrap; gap: 8px; }
+.price-chip {
+  background: linear-gradient(145deg, rgba(232, 184, 75, 0.1), rgba(232, 184, 75, 0.02));
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 8px 14px;
+  text-align: center;
+  min-width: 70px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.chip-size {
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 3px;
+  letter-spacing: 0.1em;
+}
+.chip-price {
+  display: block;
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--gold);
+}
+.price-single { font-size: 16px; font-weight: bold; color: var(--gold); }
+
+/* =============================================
+   FOOTER
+   ============================================= */
+.footer {
+  text-align: center;
+  padding: 50px 20px;
+  border-top: 1px solid var(--glass-border);
+  background: linear-gradient(0deg, rgba(10,5,2,1) 0%, transparent 100%);
+  position: relative;
+  z-index: 10;
+}
+.footer-logo { font-size: 34px; margin-bottom: 15px; opacity: 0.8;}
+.footer-name { font-family: var(--font-display); font-size: 20px; color: var(--gold); margin-bottom: 8px; letter-spacing: 1px;}
+.footer-note { font-size: 12px; color: var(--muted); line-height: 1.8;}
+
+.hl { background: rgba(232,184,75,0.4); color: #fff; padding: 0 4px; border-radius: 4px; }
+</style>
+</head>
+
+<body>
+
+<!-- Background Orbs -->
+<div class="ambient-bg">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="hero-emblem">✨🍸✨</div>
+  <h1 class="hero-name">PIT STOP Bar</h1>
+  <p class="hero-sub">Sunrise N Resort</p>
+
+  <!-- SAFE SHAYARI 1 (Fun/Mood Setting) -->
+  <div class="shayari">
+    <span class="shayari-icon">✦</span>
+    <p class="shayari-text">
+      <span class="line">"Sabko maalum hai main sharabi nahi,"</span>
+      <span class="line">"Phir bhi koi pilaye toh main kya karun."</span>
+    </p>
+  </div>
+
+  <div class="how-to-order">
+    <strong>Place Your Order</strong>
+    Find your drink, check the size and price, and simply <b>call your waiter</b> to place the order. <br>
+    <em>"Bhaiya, ek Large Blender's Pride laana!"</em>
+  </div>
+</header>
+
+<!-- ===== STICKY CONTROLS ===== -->
+<div class="controls-wrap">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input id="searchInput" class="search-box" type="search" placeholder="Search for your favorite pour..." autocomplete="off"/>
+  </div>
+  <div class="filter-row">
+    <button class="filter-pill active" data-cat="all">All Drinks</button>
+    <button class="filter-pill" data-cat="premium">Premium Whisky</button>
+    <button class="filter-pill" data-cat="scotch">Scotch</button>
+    <button class="filter-pill" data-cat="beer">Beers</button>
+    <button class="filter-pill" data-cat="vodka">Vodka</button>
+    <button class="filter-pill" data-cat="rum">Rum</button>
+    <button class="filter-pill" data-cat="regular">Regular Whisky</button>
+    <button class="filter-pill" data-cat="gin">Gin & Spirits</button>
+    <button class="filter-pill" data-cat="wine">Wine</button>
+    <button class="filter-pill" data-cat="cold">Beverages</button>
+  </div>
+</div>
+
+<main class="menu-body">
+  <p class="no-results" id="noResults">😕 No drinks found. Try searching another name.</p>
+
+  <!-- ============================
+       PREMIUM WHISKY
+       ============================ -->
+  <section class="section" data-cat="premium">
+    <button class="section-header" onclick="toggleSection(this)">
+      <span class="section-name">Premium Whisky</span>
+      <span class="section-arrow">▼</span>
+    </button>
+    <div class="section-body">
+      <div class="item-card"><div class="item-info"><p class="item-name">Blender's Pride Reserve</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹680</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹240</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹130</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Antiquity Blue</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹690</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹240</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹130</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Oaksmith Gold</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹640</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹230</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹140</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">American Pride</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹600</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹210</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹120</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Blender's Pride</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹610</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹215</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹125</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Sterling Reserve B10</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹550</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹200</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹110</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Signature</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹610</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹220</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹110</span></div></div></div></div>
+    </div>
+  </section>
+
+  <!-- ============================
+       SCOTCH
+       ============================ -->
+  <section class="section" data-cat="scotch">
+    <button class="section-header" onclick="toggleSection(this)">
+      <span class="section-name">Scotch & Malts</span>
+      <span class="section-arrow">▼</span>
+    </button>
+    <div class="section-body">
+      <div class="item-card"><div class="item-info"><p class="item-name">Chivas Regal</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹540</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹290</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Johnnie Walker Black Label</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹540</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹290</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Red Label</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹310</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹170</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Jim Beam Bourbon</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹420</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹240</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Ballantine</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹1100</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹340</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹180</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Teacher's Origin</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹480</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹260</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Teacher's 50</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹1350</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹460</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹250</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Teacher's Highland</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹1150</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹400</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹220</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Black & White</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹1200</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹430</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹225</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Vat 69</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹1000</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹350</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹190</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Black Dog Centenary</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹340</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹190</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Black Dog Gold</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹410</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹220</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">100 Pipers</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹1100</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹380</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹210</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">100 Pipers Gold</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹490</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹270</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Jameson Irish Whiskey</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹1300</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹450</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹250</span></div></div></div></div>
+    </div>
+  </section>
+
+  <!-- SAFE SHAYARI 2 (Friendship & Cheers) -->
+  <div class="shayari">
+    <span class="shayari-icon">🥂</span>
+    <p class="shayari-text">
+      <span class="line">"Maikhane mein aake koi bhed-bhaav nahi hota,"</span>
+      <span class="line">"Yahan har jaam ka ek hi mazhab hai - Dosti."</span>
+    </p>
+  </div>
+
+  <!-- ============================
+       BEER
+       ============================ -->
+  <section class="section" data-cat="beer">
+    <button class="section-header" onclick="toggleSection(this)">
+      <span class="section-name">Beer</span>
+      <span class="section-arrow">▼</span>
+    </button>
+    <div class="section-body">
+      <p class="sub-label">Mild Beers</p>
+      <div class="item-card"><div class="item-info"><p class="item-name">Kingfisher Mild</p><div class="prices"><div class="price-chip"><span class="chip-size">650ml</span><span class="chip-price">₹310</span></div><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹200</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Budweiser Mild</p><div class="prices"><div class="price-chip"><span class="chip-size">650ml</span><span class="chip-price">₹400</span></div><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹280</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Carlsberg Mild</p><div class="prices"><div class="price-chip"><span class="chip-size">650ml</span><span class="chip-price">₹360</span></div><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹240</span></div></div></div></div>
+      
+      <p class="sub-label">Strong Beers</p>
+      <div class="item-card"><div class="item-info"><p class="item-name">Carlsberg Strong</p><div class="prices"><div class="price-chip"><span class="chip-size">650ml</span><span class="chip-price">₹400</span></div><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹250</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Kingfisher Strong</p><div class="prices"><div class="price-chip"><span class="chip-size">650ml</span><span class="chip-price">₹330</span></div><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹210</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Tuborg Strong</p><div class="prices"><div class="price-chip"><span class="chip-size">650ml</span><span class="chip-price">₹320</span></div><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹210</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Budweiser Strong</p><div class="prices"><div class="price-chip"><span class="chip-size">650ml</span><span class="chip-price">₹410</span></div><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹300</span></div></div></div></div>
+    </div>
+  </section>
+
+  <!-- ============================
+       VODKA
+       ============================ -->
+  <section class="section" data-cat="vodka">
+    <button class="section-header" onclick="toggleSection(this)">
+      <span class="section-name">Vodka</span>
+      <span class="section-arrow">▼</span>
+    </button>
+    <div class="section-body">
+      <div class="item-card"><div class="item-info"><p class="item-name">Absolut</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹1150</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹390</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹220</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Smirnoff</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹640</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹230</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹130</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Smirnoff Flavours</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹660</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹250</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹140</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Grandmaster Flavours</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹480</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹170</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹90</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">White Mischief</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹310</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹120</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹70</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Magic Moments Plain</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹340</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹130</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹80</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Magic Moments Ginger</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹450</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹160</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹90</span></div></div></div></div>
+    </div>
+  </section>
+
+  <!-- ============================
+       RUM
+       ============================ -->
+  <section class="section" data-cat="rum">
+    <button class="section-header" onclick="toggleSection(this)">
+      <span class="section-name">Rum</span>
+      <span class="section-arrow">▼</span>
+    </button>
+    <div class="section-body">
+      <div class="item-card"><div class="item-info"><p class="item-name">Old Monk</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹340</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹120</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹70</span></div><div class="price-chip"><span class="chip-size">Mini</span><span class="chip-price">₹180</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">McDowell's Red Rum</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹260</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹95</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹55</span></div><div class="price-chip"><span class="chip-size">Mini</span><span class="chip-price">₹170</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Bacardi White</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹620</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹210</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹125</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Bacardi Black</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹400</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹140</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹80</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Breezers</p><div class="prices"><div class="price-chip"><span class="chip-size">Bottle</span><span class="chip-price">₹260</span></div></div></div></div>
+    </div>
+  </section>
+
+  <!-- SAFE SHAYARI 3 (Classic Humour) -->
+  <div class="shayari">
+    <span class="shayari-icon">✦</span>
+    <p class="shayari-text">
+      <span class="line">"Pilana farz tha toh kuch bhi pila diya hota,"</span>
+      <span class="line">"Sharab kam thi toh thoda pani mila diya hota!"</span>
+    </p>
+  </div>
+
+  <!-- ============================
+       REGULAR WHISKY
+       ============================ -->
+  <section class="section" data-cat="regular">
+    <button class="section-header" onclick="toggleSection(this)">
+      <span class="section-name">Regular Whisky</span>
+      <span class="section-arrow">▼</span>
+    </button>
+    <div class="section-body">
+      <div class="item-card"><div class="item-info"><p class="item-name">Oaksmith Silver</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹530</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹190</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹100</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Royal Green</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹350</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹140</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹80</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Royal Stag Barrel</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹480</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹170</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹95</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Royal Stag</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹380</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹140</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹80</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Royal Challenge</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹425</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹150</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹85</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Sterling Reserve B7</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹425</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹150</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹80</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">McDowell's No.1</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹350</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹125</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹70</span></div><div class="price-chip"><span class="chip-size">Mini</span><span class="chip-price">₹190</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">OC Blue</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹280</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹110</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹60</span></div><div class="price-chip"><span class="chip-size">Mini</span><span class="chip-price">₹200</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Imperial Blue</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹350</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹125</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹70</span></div></div></div></div>
+    </div>
+  </section>
+
+  <!-- ============================
+       GIN & OTHERS
+       ============================ -->
+  <section class="section" data-cat="gin">
+    <button class="section-header" onclick="toggleSection(this)">
+      <span class="section-name">Gin & Other Spirits</span>
+      <span class="section-arrow">▼</span>
+    </button>
+    <div class="section-body">
+      <div class="item-card"><div class="item-info"><p class="item-name">Bombay Sapphire</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹330</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹180</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Zoya</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹390</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹210</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Southbank</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹250</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹130</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Tequila</p><div class="prices"><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹310</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Jagermeister</p><div class="prices"><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹310</span></div></div></div></div>
+    </div>
+  </section>
+
+  <!-- ============================
+       WINE
+       ============================ -->
+  <section class="section" data-cat="wine">
+    <button class="section-header" onclick="toggleSection(this)">
+      <span class="section-name">Wine</span>
+      <span class="section-arrow">▼</span>
+    </button>
+    <div class="section-body">
+      <div class="item-card">
+        <div class="item-info">
+          <p class="item-name">Red Wine / White Wine</p>
+          <p style="font-size:13px; color:var(--muted); margin-bottom:10px;">Available as per stock and current rate.</p>
+          <div class="prices"><div class="price-chip" style="width:auto;"><span class="chip-price" style="font-size:13px; font-weight:normal;">Ask your Waiter</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       COLD BEVERAGES
+       ============================ -->
+  <section class="section" data-cat="cold">
+    <button class="section-header" onclick="toggleSection(this)">
+      <span class="section-name">Cold Beverages</span>
+      <span class="section-arrow">▼</span>
+    </button>
+    <div class="section-body">
+      <div class="item-card"><div class="item-info"><p class="item-name">Cold Drink</p><div class="prices"><div class="price-chip"><span class="chip-price">₹40</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Soda</p><div class="prices"><div class="price-chip"><span class="chip-price">₹35</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Mineral Water</p><div class="prices"><div class="price-chip"><span class="chip-price">₹30</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Fresh Lime Soda</p><div class="prices"><div class="price-chip"><span class="chip-price">₹80</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Fresh Lime Water</p><div class="prices"><div class="price-chip"><span class="chip-price">₹70</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Red Bull</p><div class="prices"><div class="price-chip"><span class="chip-price">₹200</span></div></div></div></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-logo">✨</div>
+  <p class="footer-name">Sunrise N Resort</p>
+  <p class="footer-note">Alcohol served only to guests 21+.<br>Management reserves the right to refuse service to intoxicated guests.</p>
+
+  <!-- SAFE SHAYARI 4 (Celebration) -->
+  <div class="shayari" style="margin-top: 30px;">
+    <p class="shayari-text" style="font-size: 16px;">
+      <span class="line">"Kuch is tarah se humne jawani nikaal di,"</span>
+      <span class="line">"Thodi si pi sharab thodi si uchhal di."</span>
+    </p>
+    <p class="shayari-attr">— Khumar Barabankvi</p>
+  </div>
+</footer>
+
+<script>
+  // Open and close accordion sections smoothly
+  function toggleSection(btn) {
+    const section = btn.parentElement;
+    section.classList.toggle('open');
+  }
+
+  // Set the first section (Premium Whisky) to be open by default
+  document.addEventListener("DOMContentLoaded", () => {
+    const firstSection = document.querySelector('.section');
+    if (firstSection) firstSection.classList.add('open');
+  });
+
+  // Highlight Search Text
+  function highlightText(text, query) {
+    if (!query) return text;
+    const regex = new RegExp(`(${query})`, 'gi');
+    return text.replace(regex, '<span class="hl">$1</span>');
+  }
+
+  // Search logic
+  const searchInput = document.getElementById('searchInput');
+  const allCards = document.querySelectorAll('.item-card');
+  const noResults = document.getElementById('noResults');
+
+  searchInput.addEventListener('input', function(e) {
+    const term = e.target.value.toLowerCase().trim();
+    let hasVisible = false;
+
+    if (term.length > 0) {
+      document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+    }
+
+    allCards.forEach(card => {
+      const nameEl = card.querySelector('.item-name');
+      const originalText = nameEl.textContent; // get pure text
+      const lowerName = originalText.toLowerCase();
+      const section = card.closest('.section');
+      
+      if (lowerName.includes(term)) {
+        card.style.display = 'flex';
+        section.style.display = 'block';
+        section.classList.add('open');
+        hasVisible = true;
+        
+        // Apply highlight
+        nameEl.innerHTML = highlightText(originalText, term);
+      } else {
+        card.style.display = 'none';
+        nameEl.innerHTML = originalText; // reset if not match
+      }
+    });
+
+    noResults.style.display = hasVisible || term === '' ? 'none' : 'block';
+  });
+
+  // Category Filter logic
+  const pills = document.querySelectorAll('.filter-pill');
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      // Manage active states
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      
+      // Clear search visually and logically
+      searchInput.value = '';
+      allCards.forEach(c => {
+         const n = c.querySelector('.item-name');
+         n.innerHTML = n.textContent; // clear highlight
+      });
+
+      const category = pill.getAttribute('data-cat');
+      
+      document.querySelectorAll('.section').forEach(sec => {
+        if (category === 'all') {
+          sec.style.display = 'block';
+          allCards.forEach(c => c.style.display = 'flex');
+        } else {
+          if (sec.getAttribute('data-cat') === category) {
+            sec.style.display = 'block';
+            sec.classList.add('open');
+            sec.querySelectorAll('.item-card').forEach(c => c.style.display = 'flex');
+          } else {
+            sec.style.display = 'none';
+            sec.classList.remove('open');
+          }
+        }
+      });
+      noResults.style.display = 'none';
+      
+      // Scroll to top of menu smoothly
+      document.querySelector('.controls-wrap').scrollIntoView({behavior: 'smooth'});
+    });
+  });
+</script>
+
+</body>
+</html>
