@@ -45,7 +45,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Moving Glowing Orbs for "Mast" Vibe */
 .ambient-bg {
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;
@@ -102,7 +101,6 @@ body {
   margin-bottom: 30px;
 }
 
-/* Glassmorphism Order Guide */
 .how-to-order {
   display: inline-block;
   background: var(--bg-glass);
@@ -120,29 +118,106 @@ body {
 .how-to-order em { color: var(--muted); font-size: 13px; display: block; margin-top: 8px;}
 
 /* =============================================
-   SHAYARI BLOCKS (100% SAFE & FUN)
+   MEHFIL-E-SHAYARI (CINEMATIC SLIDESHOW)
    ============================================= */
-.shayari {
-  text-align: center;
+.mehfil-section {
+  max-width: 650px;
+  margin: 0 auto 40px;
+  padding: 0 15px;
+}
+.mehfil-card {
+  background: linear-gradient(145deg, rgba(232, 184, 75, 0.08), rgba(255, 255, 255, 0.02));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-card);
   padding: 30px 20px;
-  margin: 10px 0;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
-.shayari-icon { color: var(--gold-dim); font-size: 18px; margin-bottom: 10px; display: block; opacity: 0.7;}
-.shayari-text {
+.mehfil-title {
   font-family: var(--font-display);
-  font-style: italic;
-  font-size: 18px;
-  line-height: 1.8;
-  color: var(--gold-light);
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-}
-.shayari-text .line { display: block; }
-.shayari-attr {
-  margin-top: 15px;
-  font-size: 11px;
-  letter-spacing: 0.15em;
+  font-size: 24px;
+  color: var(--gold);
+  margin-bottom: 20px;
+  letter-spacing: 2px;
   text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(232, 184, 75, 0.3);
+}
+.mood-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+.mood-tab {
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(232, 184, 75, 0.4);
+  color: var(--cream);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  letter-spacing: 0.5px;
+}
+.mood-tab:hover {
+  background: rgba(232, 184, 75, 0.2);
+}
+.mood-tab.active {
+  background: var(--gold);
+  color: var(--bg-deep);
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(232, 184, 75, 0.5);
+  transform: scale(1.05);
+}
+
+.cinematic-container {
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  user-select: none; /* Prevents text selection on rapid tapping */
+}
+.cinematic-content {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-style: italic;
+  color: var(--gold-light);
+  line-height: 1.8;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  opacity: 0; 
+  transform: translateY(15px); 
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.cinematic-content.active {
+  opacity: 1; 
+  transform: translateY(0); 
+}
+.cinematic-content .author {
+  display: block;
+  font-size: 12px;
+  font-style: normal;
+  color: var(--gold-dim);
+  margin-top: 15px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+.play-status {
+  font-size: 11px;
   color: var(--muted);
+  margin-top: 10px;
+  cursor: pointer;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  user-select: none;
+}
+.play-status:hover {
+  color: var(--gold);
 }
 
 /* =============================================
@@ -173,7 +248,6 @@ body {
 .search-wrap { position: relative; margin-bottom: 16px; }
 .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--gold); font-size: 18px;}
 
-/* Slick Category Pills */
 .filter-row {
   display: flex;
   gap: 10px;
@@ -258,7 +332,6 @@ body {
   color: var(--gold-dim); padding: 15px 10px 8px; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 10px;
 }
 
-/* Glass Cards */
 .item-card {
   display: flex;
   padding: 16px;
@@ -268,7 +341,6 @@ body {
   border: 1px solid rgba(255,255,255,0.03);
   transition: var(--transition);
 }
-.item-card:active { background: rgba(232, 184, 75, 0.1); border-color: var(--gold-dim); }
 .item-info { flex: 1; }
 .item-name {
   font-family: var(--font-display);
@@ -278,7 +350,6 @@ body {
   letter-spacing: 0.5px;
 }
 
-/* Glowing Price Chips */
 .prices { display: flex; flex-wrap: wrap; gap: 8px; }
 .price-chip {
   background: linear-gradient(145deg, rgba(232, 184, 75, 0.1), rgba(232, 184, 75, 0.02));
@@ -303,7 +374,6 @@ body {
   font-weight: bold;
   color: var(--gold);
 }
-.price-single { font-size: 16px; font-weight: bold; color: var(--gold); }
 
 /* =============================================
    FOOTER
@@ -319,34 +389,22 @@ body {
 .footer-logo { font-size: 34px; margin-bottom: 15px; opacity: 0.8;}
 .footer-name { font-family: var(--font-display); font-size: 20px; color: var(--gold); margin-bottom: 8px; letter-spacing: 1px;}
 .footer-note { font-size: 12px; color: var(--muted); line-height: 1.8;}
-
 .hl { background: rgba(232,184,75,0.4); color: #fff; padding: 0 4px; border-radius: 4px; }
 </style>
 </head>
 
 <body>
 
-<!-- Background Orbs -->
 <div class="ambient-bg">
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
 </div>
 
-<!-- ===== HERO ===== -->
 <header class="hero">
   <div class="hero-emblem">✨🍸✨</div>
   <h1 class="hero-name">PIT STOP Bar</h1>
   <p class="hero-sub">Sunrise N Resort</p>
-
-  <!-- SAFE SHAYARI 1 (Fun/Mood Setting) -->
-  <div class="shayari">
-    <span class="shayari-icon">✦</span>
-    <p class="shayari-text">
-      <span class="line">"Sabko maalum hai main sharabi nahi,"</span>
-      <span class="line">"Phir bhi koi pilaye toh main kya karun."</span>
-    </p>
-  </div>
 
   <div class="how-to-order">
     <strong>Place Your Order</strong>
@@ -355,7 +413,25 @@ body {
   </div>
 </header>
 
-<!-- ===== STICKY CONTROLS ===== -->
+<div class="mehfil-section">
+  <div class="mehfil-card">
+    <h2 class="mehfil-title">Mehfil-e-Shayari</h2>
+    <div class="mood-tabs">
+      <button class="mood-tab active" onclick="changeMood('nasha', this)">🥃 Nasha</button>
+      <button class="mood-tab" onclick="changeMood('jaun', this)">🖋️ Jaun Elia</button>
+      <button class="mood-tab" onclick="changeMood('dosti', this)">🍻 Dosti</button>
+      <button class="mood-tab" onclick="changeMood('ishq', this)">❤️ Ishq</button>
+      <button class="mood-tab" onclick="changeMood('ghalib', this)">📜 Ghalib</button>
+    </div>
+    
+    <div class="cinematic-container" onclick="togglePause()">
+      <div class="cinematic-content" id="cinematicText">
+        </div>
+    </div>
+    <div class="play-status" id="playStatus" onclick="togglePause()">▶ Playing (Tap to Pause)</div>
+  </div>
+</div>
+
 <div class="controls-wrap">
   <div class="search-wrap">
     <span class="search-icon">🔍</span>
@@ -364,78 +440,58 @@ body {
   <div class="filter-row">
     <button class="filter-pill active" data-cat="all">All Drinks</button>
     <button class="filter-pill" data-cat="premium">Premium Whisky</button>
-    <button class="filter-pill" data-cat="scotch">Scotch</button>
+    <button class="filter-pill" data-cat="scotch">Scotch & Malts</button>
     <button class="filter-pill" data-cat="beer">Beers</button>
     <button class="filter-pill" data-cat="vodka">Vodka</button>
     <button class="filter-pill" data-cat="rum">Rum</button>
     <button class="filter-pill" data-cat="regular">Regular Whisky</button>
-    <button class="filter-pill" data-cat="gin">Gin & Spirits</button>
+    <button class="filter-pill" data-cat="gin">Gin & Tequila</button>
     <button class="filter-pill" data-cat="wine">Wine</button>
-    <button class="filter-pill" data-cat="cold">Beverages</button>
   </div>
 </div>
 
 <main class="menu-body">
   <p class="no-results" id="noResults">😕 No drinks found. Try searching another name.</p>
 
-  <!-- ============================
-       PREMIUM WHISKY
-       ============================ -->
   <section class="section" data-cat="premium">
     <button class="section-header" onclick="toggleSection(this)">
       <span class="section-name">Premium Whisky</span>
       <span class="section-arrow">▼</span>
     </button>
     <div class="section-body">
-      <div class="item-card"><div class="item-info"><p class="item-name">Blender's Pride Reserve</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹680</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹240</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹130</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Antiquity Blue</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹690</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹240</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹130</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Oaksmith Gold</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹640</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹230</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹140</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">American Pride</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹600</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹210</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹120</span></div></div></div></div>
       <div class="item-card"><div class="item-info"><p class="item-name">Blender's Pride</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹610</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹215</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹125</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Sterling Reserve B10</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹550</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹200</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹110</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Blender's Pride Reserve</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹680</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹240</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹130</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Oaksmith Gold</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹640</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹230</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹140</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Antiquity Blue</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹690</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹240</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹130</span></div></div></div></div>
       <div class="item-card"><div class="item-info"><p class="item-name">Signature</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹610</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹220</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹110</span></div></div></div></div>
     </div>
   </section>
 
-  <!-- ============================
-       SCOTCH
-       ============================ -->
   <section class="section" data-cat="scotch">
     <button class="section-header" onclick="toggleSection(this)">
-      <span class="section-name">Scotch & Malts</span>
+      <span class="section-name">Scotch & Bourbon</span>
       <span class="section-arrow">▼</span>
     </button>
     <div class="section-body">
+      <p class="sub-label">Scotch Whisky</p>
       <div class="item-card"><div class="item-info"><p class="item-name">Chivas Regal</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹540</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹290</span></div></div></div></div>
       <div class="item-card"><div class="item-info"><p class="item-name">Johnnie Walker Black Label</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹540</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹290</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Red Label</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹310</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹170</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Jim Beam Bourbon</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹420</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹240</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Ballantine</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹1100</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹340</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹180</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Teacher's Origin</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹480</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹260</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Red Label</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹900</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹310</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹170</span></div></div></div></div>
       <div class="item-card"><div class="item-info"><p class="item-name">Teacher's 50</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹1350</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹460</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹250</span></div></div></div></div>
       <div class="item-card"><div class="item-info"><p class="item-name">Teacher's Highland</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹1150</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹400</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹220</span></div></div></div></div>
       <div class="item-card"><div class="item-info"><p class="item-name">Black & White</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹1200</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹430</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹225</span></div></div></div></div>
       <div class="item-card"><div class="item-info"><p class="item-name">Vat 69</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹1000</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹350</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹190</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Black Dog Centenary</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹340</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹190</span></div></div></div></div>
       <div class="item-card"><div class="item-info"><p class="item-name">Black Dog Gold</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹410</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹220</span></div></div></div></div>
       <div class="item-card"><div class="item-info"><p class="item-name">100 Pipers</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹1100</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹380</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹210</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">100 Pipers Gold</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹490</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹270</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Jameson Irish Whiskey</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹1300</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹450</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹250</span></div></div></div></div>
+      
+      <p class="sub-label" style="margin-top:20px;">Bourbon & Malt</p>
+      <div class="item-card"><div class="item-info"><p class="item-name">Jim Beam</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹240</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹140</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Malibu</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹280</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹180</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Jägermeister</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹500</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹290</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Kahlúa</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹250</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹140</span></div></div></div></div>
     </div>
   </section>
 
-  <!-- SAFE SHAYARI 2 (Friendship & Cheers) -->
-  <div class="shayari">
-    <span class="shayari-icon">🥂</span>
-    <p class="shayari-text">
-      <span class="line">"Maikhane mein aake koi bhed-bhaav nahi hota,"</span>
-      <span class="line">"Yahan har jaam ka ek hi mazhab hai - Dosti."</span>
-    </p>
-  </div>
-
-  <!-- ============================
-       BEER
-       ============================ -->
   <section class="section" data-cat="beer">
     <button class="section-header" onclick="toggleSection(this)">
       <span class="section-name">Beer</span>
@@ -443,66 +499,47 @@ body {
     </button>
     <div class="section-body">
       <p class="sub-label">Mild Beers</p>
-      <div class="item-card"><div class="item-info"><p class="item-name">Kingfisher Mild</p><div class="prices"><div class="price-chip"><span class="chip-size">650ml</span><span class="chip-price">₹310</span></div><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹200</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Budweiser Mild</p><div class="prices"><div class="price-chip"><span class="chip-size">650ml</span><span class="chip-price">₹400</span></div><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹280</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Carlsberg Mild</p><div class="prices"><div class="price-chip"><span class="chip-size">650ml</span><span class="chip-price">₹360</span></div><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹240</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Kingfisher Mild</p><div class="prices"><div class="price-chip"><span class="chip-size">660ml</span><span class="chip-price">₹310</span></div><div class="price-chip"><span class="chip-size">500ml</span><span class="chip-price">₹250</span></div><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹200</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Kingfisher Ultra</p><div class="prices"><div class="price-chip"><span class="chip-size">660ml</span><span class="chip-price">₹400</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Budweiser Mild</p><div class="prices"><div class="price-chip"><span class="chip-size">660ml</span><span class="chip-price">₹400</span></div><div class="price-chip"><span class="chip-size">500ml</span><span class="chip-price">₹350</span></div><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹280</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Corona Extra</p><div class="prices"><div class="price-chip"><span class="chip-size">500ml</span><span class="chip-price">₹350</span></div><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹290</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Heineken Lager</p><div class="prices"><div class="price-chip"><span class="chip-size">660ml</span><span class="chip-price">₹420</span></div><div class="price-chip"><span class="chip-size">500ml</span><span class="chip-price">₹360</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Breezers</p><div class="prices"><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹260</span></div></div></div></div>
       
       <p class="sub-label">Strong Beers</p>
-      <div class="item-card"><div class="item-info"><p class="item-name">Carlsberg Strong</p><div class="prices"><div class="price-chip"><span class="chip-size">650ml</span><span class="chip-price">₹400</span></div><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹250</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Kingfisher Strong</p><div class="prices"><div class="price-chip"><span class="chip-size">650ml</span><span class="chip-price">₹330</span></div><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹210</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Tuborg Strong</p><div class="prices"><div class="price-chip"><span class="chip-size">650ml</span><span class="chip-price">₹320</span></div><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹210</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Budweiser Strong</p><div class="prices"><div class="price-chip"><span class="chip-size">650ml</span><span class="chip-price">₹410</span></div><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹300</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Kingfisher Strong</p><div class="prices"><div class="price-chip"><span class="chip-size">660ml</span><span class="chip-price">₹330</span></div><div class="price-chip"><span class="chip-size">500ml</span><span class="chip-price">₹250</span></div><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹210</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Budweiser Strong</p><div class="prices"><div class="price-chip"><span class="chip-size">660ml</span><span class="chip-price">₹410</span></div><div class="price-chip"><span class="chip-size">500ml</span><span class="chip-price">₹350</span></div><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹300</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Tuborg Strong</p><div class="prices"><div class="price-chip"><span class="chip-size">660ml</span><span class="chip-price">₹320</span></div><div class="price-chip"><span class="chip-size">500ml</span><span class="chip-price">₹250</span></div><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹210</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Carlsberg Strong</p><div class="prices"><div class="price-chip"><span class="chip-size">660ml</span><span class="chip-price">₹400</span></div><div class="price-chip"><span class="chip-size">500ml</span><span class="chip-price">₹350</span></div><div class="price-chip"><span class="chip-size">330ml</span><span class="chip-price">₹280</span></div></div></div></div>
     </div>
   </section>
 
-  <!-- ============================
-       VODKA
-       ============================ -->
   <section class="section" data-cat="vodka">
     <button class="section-header" onclick="toggleSection(this)">
       <span class="section-name">Vodka</span>
       <span class="section-arrow">▼</span>
     </button>
     <div class="section-body">
-      <div class="item-card"><div class="item-info"><p class="item-name">Absolut</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹1150</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹390</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹220</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Absolut</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹350</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹220</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Absolut Flavours</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹420</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹250</span></div></div></div></div>
       <div class="item-card"><div class="item-info"><p class="item-name">Smirnoff</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹640</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹230</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹130</span></div></div></div></div>
       <div class="item-card"><div class="item-info"><p class="item-name">Smirnoff Flavours</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹660</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹250</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹140</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Grandmaster Flavours</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹480</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹170</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹90</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">White Mischief</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹310</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹120</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹70</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Magic Moments Plain</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹340</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹130</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹80</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Magic Moments Ginger</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹450</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹160</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹90</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Magic Moments</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹400</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹140</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹80</span></div></div></div></div>
     </div>
   </section>
 
-  <!-- ============================
-       RUM
-       ============================ -->
   <section class="section" data-cat="rum">
     <button class="section-header" onclick="toggleSection(this)">
       <span class="section-name">Rum</span>
       <span class="section-arrow">▼</span>
     </button>
     <div class="section-body">
-      <div class="item-card"><div class="item-info"><p class="item-name">Old Monk</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹340</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹120</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹70</span></div><div class="price-chip"><span class="chip-size">Mini</span><span class="chip-price">₹180</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">McDowell's Red Rum</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹260</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹95</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹55</span></div><div class="price-chip"><span class="chip-size">Mini</span><span class="chip-price">₹170</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Old Monk</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹340</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹120</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹70</span></div></div></div></div>
       <div class="item-card"><div class="item-info"><p class="item-name">Bacardi White</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹620</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹210</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹125</span></div></div></div></div>
       <div class="item-card"><div class="item-info"><p class="item-name">Bacardi Black</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹400</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹140</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹80</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Breezers</p><div class="prices"><div class="price-chip"><span class="chip-size">Bottle</span><span class="chip-price">₹260</span></div></div></div></div>
     </div>
   </section>
 
-  <!-- SAFE SHAYARI 3 (Classic Humour) -->
-  <div class="shayari">
-    <span class="shayari-icon">✦</span>
-    <p class="shayari-text">
-      <span class="line">"Pilana farz tha toh kuch bhi pila diya hota,"</span>
-      <span class="line">"Sharab kam thi toh thoda pani mila diya hota!"</span>
-    </p>
-  </div>
-
-  <!-- ============================
-       REGULAR WHISKY
-       ============================ -->
   <section class="section" data-cat="regular">
     <button class="section-header" onclick="toggleSection(this)">
       <span class="section-name">Regular Whisky</span>
@@ -510,110 +547,199 @@ body {
     </button>
     <div class="section-body">
       <div class="item-card"><div class="item-info"><p class="item-name">Oaksmith Silver</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹530</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹190</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹100</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Royal Green</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹350</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹140</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹80</span></div></div></div></div>
       <div class="item-card"><div class="item-info"><p class="item-name">Royal Stag Barrel</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹480</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹170</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹95</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Royal Stag</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹380</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹140</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹80</span></div></div></div></div>
       <div class="item-card"><div class="item-info"><p class="item-name">Royal Challenge</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹425</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹150</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹85</span></div></div></div></div>
       <div class="item-card"><div class="item-info"><p class="item-name">Sterling Reserve B7</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹425</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹150</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹80</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">McDowell's No.1</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹350</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹125</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹70</span></div><div class="price-chip"><span class="chip-size">Mini</span><span class="chip-price">₹190</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">OC Blue</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹280</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹110</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹60</span></div><div class="price-chip"><span class="chip-size">Mini</span><span class="chip-price">₹200</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Royal Stag</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹380</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹140</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹80</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Royal Green</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹350</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹140</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹80</span></div></div></div></div>
       <div class="item-card"><div class="item-info"><p class="item-name">Imperial Blue</p><div class="prices"><div class="price-chip"><span class="chip-size">Nip</span><span class="chip-price">₹350</span></div><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹125</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹70</span></div></div></div></div>
     </div>
   </section>
 
-  <!-- ============================
-       GIN & OTHERS
-       ============================ -->
   <section class="section" data-cat="gin">
     <button class="section-header" onclick="toggleSection(this)">
-      <span class="section-name">Gin & Other Spirits</span>
+      <span class="section-name">Gin & Tequila</span>
       <span class="section-arrow">▼</span>
     </button>
     <div class="section-body">
-      <div class="item-card"><div class="item-info"><p class="item-name">Bombay Sapphire</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹330</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹180</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Zoya</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹390</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹210</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Southbank</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹250</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹130</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Tequila</p><div class="prices"><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹310</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Jagermeister</p><div class="prices"><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹310</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Beefeater Gin</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹350</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹220</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Camino Tequila</p><div class="prices"><div class="price-chip"><span class="chip-size">Large</span><span class="chip-price">₹350</span></div><div class="price-chip"><span class="chip-size">Small</span><span class="chip-price">₹220</span></div></div></div></div>
     </div>
   </section>
 
-  <!-- ============================
-       WINE
-       ============================ -->
   <section class="section" data-cat="wine">
     <button class="section-header" onclick="toggleSection(this)">
       <span class="section-name">Wine</span>
       <span class="section-arrow">▼</span>
     </button>
     <div class="section-body">
-      <div class="item-card">
-        <div class="item-info">
-          <p class="item-name">Red Wine / White Wine</p>
-          <p style="font-size:13px; color:var(--muted); margin-bottom:10px;">Available as per stock and current rate.</p>
-          <div class="prices"><div class="price-chip" style="width:auto;"><span class="chip-price" style="font-size:13px; font-weight:normal;">Ask your Waiter</span></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================
-       COLD BEVERAGES
-       ============================ -->
-  <section class="section" data-cat="cold">
-    <button class="section-header" onclick="toggleSection(this)">
-      <span class="section-name">Cold Beverages</span>
-      <span class="section-arrow">▼</span>
-    </button>
-    <div class="section-body">
-      <div class="item-card"><div class="item-info"><p class="item-name">Cold Drink</p><div class="prices"><div class="price-chip"><span class="chip-price">₹40</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Soda</p><div class="prices"><div class="price-chip"><span class="chip-price">₹35</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Mineral Water</p><div class="prices"><div class="price-chip"><span class="chip-price">₹30</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Fresh Lime Soda</p><div class="prices"><div class="price-chip"><span class="chip-price">₹80</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Fresh Lime Water</p><div class="prices"><div class="price-chip"><span class="chip-price">₹70</span></div></div></div></div>
-      <div class="item-card"><div class="item-info"><p class="item-name">Red Bull</p><div class="prices"><div class="price-chip"><span class="chip-price">₹200</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Satori</p><div class="prices"><div class="price-chip"><span class="chip-size">750ml</span><span class="chip-price">₹1450</span></div><div class="price-chip"><span class="chip-size">375ml</span><span class="chip-price">₹900</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Sula Brut</p><div class="prices"><div class="price-chip"><span class="chip-size">750ml</span><span class="chip-price">₹2100</span></div><div class="price-chip"><span class="chip-size">375ml</span><span class="chip-price">₹1250</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Sula Chenin Blanc</p><div class="prices"><div class="price-chip"><span class="chip-size">750ml</span><span class="chip-price">₹1450</span></div><div class="price-chip"><span class="chip-size">375ml</span><span class="chip-price">₹950</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Sula Shiraz Cabernet</p><div class="prices"><div class="price-chip"><span class="chip-size">750ml</span><span class="chip-price">₹1650</span></div><div class="price-chip"><span class="chip-size">375ml</span><span class="chip-price">₹1050</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Jacob's Creek Chardonnay</p><div class="prices"><div class="price-chip"><span class="chip-size">750ml</span><span class="chip-price">₹2150</span></div></div></div></div>
+      <div class="item-card"><div class="item-info"><p class="item-name">Jacob's Creek Shiraz Cabernet</p><div class="prices"><div class="price-chip"><span class="chip-size">750ml</span><span class="chip-price">₹2150</span></div></div></div></div>
     </div>
   </section>
 
 </main>
 
-<!-- ===== FOOTER ===== -->
 <footer class="footer">
   <div class="footer-logo">✨</div>
   <p class="footer-name">Sunrise N Resort</p>
   <p class="footer-note">Alcohol served only to guests 21+.<br>Management reserves the right to refuse service to intoxicated guests.</p>
-
-  <!-- SAFE SHAYARI 4 (Celebration) -->
-  <div class="shayari" style="margin-top: 30px;">
-    <p class="shayari-text" style="font-size: 16px;">
-      <span class="line">"Kuch is tarah se humne jawani nikaal di,"</span>
-      <span class="line">"Thodi si pi sharab thodi si uchhal di."</span>
-    </p>
-    <p class="shayari-attr">— Khumar Barabankvi</p>
-  </div>
 </footer>
 
 <script>
-  // Open and close accordion sections smoothly
+  // ==========================================
+  // CINEMATIC SHAYARI SLIDESHOW LOGIC
+  // ==========================================
+  const shayariDB = {
+    nasha: [
+      { text: "Zahid sharab peene de masjid mein baith kar,<br>Ya wo jagah bata jahan Khuda nahi.", author: "Mirza Ghalib" },
+      { text: "Pilana farz tha toh kuch bhi pila diya hota,<br>Sharab kam thi toh thoda pani mila diya hota!", author: "Anonymous" },
+      { text: "Kuch is tarah se humne jawani nikaal di,<br>Thodi si pi sharab thodi si uchhal di.", author: "Khumar Barabankvi" },
+      { text: "Maikhane ki taheen na kar ae waiz,<br>Yahan toh log Khuda ko bhi yaad karte hain pee kar.", author: "Anonymous" },
+      { text: "Ek hi toh shauk rakhte hain hum,<br>Hosh mein reh kar madhosh rehne ka.", author: "Anonymous" },
+      { text: "Gham is qadar badhe ki main ghabra ke pee gaya,<br>Is dil ki bebasi pe taras kha ke pee gaya.", author: "Sahir Ludhianvi" },
+      { text: "Mujhe peene ka shauk nahi, peeta hoon gham bhulane ko,<br>Teri yaadein mitane ko, peeta hoon gham bhulane ko.", author: "Anonymous" },
+      { text: "Nashe mein bhi tera naam lab par aata hai,<br>Kaun kehta hai sharab sab kuch bhula deti hai.", author: "Anonymous" },
+      { text: "Aaj peene de mujhe, kal ki kisko khabar,<br>Zindagi ek nashe ki tarah dhalti jayegi.", author: "Anonymous" },
+      { text: "Log kehte hain sharab buri cheez hai,<br>Par yahi toh ek cheez hai jo hosh uda deti hai.", author: "Anonymous" },
+      { text: "Maikhane ka darwaza khula rakhna mere dost,<br>Aaj raat kisi ke yaad aane ki sambhavna hai.", author: "Anonymous" },
+      { text: "Har jaam mein ek qissa chhupa hota hai,<br>Kabhi khushi ka, toh kabhi gham ka hissa hota hai.", author: "Anonymous" }
+    ],
+    jaun: [
+      { text: "Ye mujhe chain kyun nahi padta,<br>Ek hi shakhs tha jahaan mein kya?", author: "Jaun Elia" },
+      { text: "Sharm, dehshat, jhijhak, pareshani...<br>Aap, ji, magar, ye sab kya hai, Tum mera naam kyun nahi leti?", author: "Jaun Elia" },
+      { text: "Naya ek rishta paida kyun karein hum,<br>Bichhadna hai toh jhagda kyun karein hum?", author: "Jaun Elia" },
+      { text: "Zindagi kis tarah basar hogi,<br>Dil nahi lag raha mohabbat mein.", author: "Jaun Elia" },
+      { text: "Main bhi bohot ajeeb hoon itna ajeeb hoon ki bas,<br>Khud ko tabah kar liya aur malaal bhi nahi.", author: "Jaun Elia" },
+      { text: "Kaun is ghar ki dekh-bhaal kare,<br>Roz ek cheez toot jaati hai.", author: "Jaun Elia" },
+      { text: "Kaisa shakhs tha wo, kaisa shakhs tha wo,<br>Uski khamoshi mein ek awaaz thi.", author: "Jaun Elia" },
+      { text: "Apne sab yaar kaam kar rahe hain,<br>Aur hum hain ki naam kar rahe hain.", author: "Jaun Elia" },
+      { text: "Humne toh bas ek barish dekhi thi,<br>Logon ne toh pura toofan dekh liya.", author: "Jaun Elia" },
+      { text: "Koi toh tha jo mere pass aane wala tha,<br>Magar shayad wo rasta bhool gaya.", author: "Jaun Elia" },
+      { text: "Tumhari yaad se humne jo kuch paya hai,<br>Wo ek dard hai aur ek muskurahat hai.", author: "Jaun Elia" }
+    ],
+    dosti: [
+      { text: "Maikhane mein aake koi bhed-bhaav nahi hota,<br>Yahan har jaam ka ek hi mazhab hai - Dosti.", author: "Anonymous" },
+      { text: "Bina doston ke ye jaam kaisa,<br>Jo chhalak ke na gire, wo nasha kaisa?", author: "Anonymous" },
+      { text: "Doston ki kami ko pehchante hain hum,<br>Duniya ke ghamon ko bhi jaante hain hum.", author: "Anonymous" },
+      { text: "Kuch toh baat hai in doston ki mehfil mein,<br>Warna ek glass mein itni khushi kahan milti hai.", author: "Anonymous" },
+      { text: "Sachche dost aur purani sharab,<br>Dono ka nasha waqt ke sath badhta hai.", author: "Anonymous" },
+      { text: "Dost wahi jo bina pooche samajh le,<br>Sharab wahi jo bina piye chad jaaye.", author: "Anonymous" },
+      { text: "Jab tak dost sath hain, har pal ek jashn hai,<br>Aur har jashn mein ek jaam jaruri hai.", author: "Anonymous" },
+      { text: "Dosti wo nasha hai jo kabhi nahi utarta,<br>Chahe kitni bhi sharab kyu na pee lo.", author: "Anonymous" },
+      { text: "Zindagi ke har safar mein doston ki zarurat hoti hai,<br>Aur doston ke sath baith kar har mehfil sajti hai.", author: "Anonymous" },
+      { text: "Tere ishq se toh achha hai mera dost,<br>Kam se kam nasha toh sachha deta hai.", author: "Anonymous" }
+    ],
+    ishq: [
+      { text: "Unki aankhon se pee hai humne,<br>Ab ye maikhane ki sharab asar nahi karti.", author: "Anonymous" },
+      { text: "Woh aashiqui jo mukammal ho,<br>Usme kashish kahan hoti hai?", author: "Anonymous" },
+      { text: "Hosh walon ko khabar kya be-khudi kya cheez hai,<br>Ishq kijiye phir samajhiye zindagi kya cheez hai.", author: "Nida Fazli" },
+      { text: "Tum mere paas hote ho goya,<br>Jab koi doosra nahi hota.", author: "Momin Khan Momin" },
+      { text: "Tum haqeeqat nahi ho hasrat ho,<br>Jo mile khwab mein wahi daulat ho.", author: "Anonymous" },
+      { text: "Mohabbat mein nasha hai, aur nasha mohabbat ka,<br>Donon hi haalat mein aashiq madhosh rehta hai.", author: "Anonymous" },
+      { text: "Teri chahat ka nasha aisa chadh gaya hai,<br>Ki ab koi aur sharab bhathi nahi.", author: "Anonymous" },
+      { text: "Ishq ka jaam kabhi chhalakta nahi,<br>Lekin jo isko peele wo kabhi sambhalta nahi.", author: "Anonymous" },
+      { text: "Tere deedar ka nasha is qadar hai,<br>Maano sari umr ka nasha ek hi pal mein mil gaya ho.", author: "Anonymous" },
+      { text: "Dil ko tere ishq ne iss qadar madhosh kiya,<br>Ki ab maikhane ka rasta hi bhool gaye.", author: "Anonymous" }
+    ],
+    ghalib: [
+      { text: "Hazaaron khwahishein aisi ki har khwahish pe dum nikle,<br>Bohot niklay mere armaan, lekin phir bhi kam nikle.", author: "Mirza Ghalib" },
+      { text: "Ishq ne 'Ghalib' nikamma kar diya,<br>Warna hum bhi aadmi the kaam ke.", author: "Mirza Ghalib" },
+      { text: "Unke dekhe se jo aa jati hai muh pe raunak,<br>Wo samajhte hain ki beemar ka haal achha hai.", author: "Mirza Ghalib" },
+      { text: "Dil-e-nadaan tujhe hua kya hai,<br>Aakhir is dard ki dawa kya hai?", author: "Mirza Ghalib" },
+      { text: "Aah ko chahiye ek umr asar hone tak,<br>Kaun jeeta hai teri zulf ke sar hone tak.", author: "Mirza Ghalib" },
+      { text: "Hum ko maloom hai jannat ki haqeeqat lekin,<br>Dil ke khush rakhne ko 'Ghalib' ye khayal achha hai.", author: "Mirza Ghalib" },
+      { text: "In aablon se paon ke ghabra gaya tha main,<br>Ji khush hua hai rah ko pur-khaar dekh kar.", author: "Mirza Ghalib" },
+      { text: "Ye na thi hamari qismat ki visaal-e-yaar hota,<br>Agar aur jeete rehte yahi intezaar hota.", author: "Mirza Ghalib" },
+      { text: "Phir usi bewafa pe marte hain,<br>Phir wahi zindagi hamari hai.", author: "Mirza Ghalib" },
+      { text: "Dard minnat-kash-e-dawa na hua,<br>Main na achha hua, bura na hua.", author: "Mirza Ghalib" }
+    ]
+  };
+
+  let currentMood = 'nasha';
+  let currentIndex = 0;
+  let slideshowInterval;
+  const slideDuration = 6000; // 6 seconds per slide
+  let isPaused = false;
+
+  const contentBox = document.getElementById('cinematicText');
+  const playStatus = document.getElementById('playStatus');
+
+  function updateShayariContent(instant = false) {
+    if (isPaused) return; // Stop executing if user paused
+
+    const list = shayariDB[currentMood];
+    const currentShayari = list[currentIndex];
+    
+    contentBox.classList.remove('active'); // Trigger Fade Out
+    
+    setTimeout(() => {
+      contentBox.innerHTML = `${currentShayari.text}<span class="author">- ${currentShayari.author}</span>`;
+      contentBox.classList.add('active'); // Trigger Fade In
+      currentIndex = (currentIndex + 1) % list.length;
+    }, instant ? 50 : 800); // 800ms gives time for fade-out CSS to run
+  }
+
+  function startSlideshow() {
+    clearInterval(slideshowInterval);
+    isPaused = false;
+    updateStatusUI();
+    updateShayariContent(true); // Instant load first slide
+    slideshowInterval = setInterval(() => updateShayariContent(false), slideDuration);
+  }
+
+  function togglePause() {
+    isPaused = !isPaused;
+    updateStatusUI();
+  }
+
+  function updateStatusUI() {
+    if (isPaused) {
+      playStatus.innerHTML = '⏸ Paused (Tap to Play)';
+      playStatus.style.color = 'var(--gold)';
+    } else {
+      playStatus.innerHTML = '▶ Playing (Tap to Pause)';
+      playStatus.style.color = 'var(--muted)';
+    }
+  }
+
+  function changeMood(mood, btnElement) {
+    if (currentMood === mood) return;
+    
+    document.querySelectorAll('.mood-tab').forEach(t => t.classList.remove('active'));
+    btnElement.classList.add('active');
+    
+    currentMood = mood;
+    currentIndex = 0;
+    
+    startSlideshow();
+  }
+
+  // ==========================================
+  // MENU INTERACTION LOGIC
+  // ==========================================
+  
   function toggleSection(btn) {
     const section = btn.parentElement;
     section.classList.toggle('open');
   }
 
-  // Set the first section (Premium Whisky) to be open by default
   document.addEventListener("DOMContentLoaded", () => {
     const firstSection = document.querySelector('.section');
     if (firstSection) firstSection.classList.add('open');
+    startSlideshow();
   });
 
-  // Highlight Search Text
   function highlightText(text, query) {
     if (!query) return text;
     const regex = new RegExp(`(${query})`, 'gi');
     return text.replace(regex, '<span class="hl">$1</span>');
   }
 
-  // Search logic
   const searchInput = document.getElementById('searchInput');
   const allCards = document.querySelectorAll('.item-card');
   const noResults = document.getElementById('noResults');
@@ -628,7 +754,7 @@ body {
 
     allCards.forEach(card => {
       const nameEl = card.querySelector('.item-name');
-      const originalText = nameEl.textContent; // get pure text
+      const originalText = nameEl.textContent;
       const lowerName = originalText.toLowerCase();
       const section = card.closest('.section');
       
@@ -637,31 +763,26 @@ body {
         section.style.display = 'block';
         section.classList.add('open');
         hasVisible = true;
-        
-        // Apply highlight
         nameEl.innerHTML = highlightText(originalText, term);
       } else {
         card.style.display = 'none';
-        nameEl.innerHTML = originalText; // reset if not match
+        nameEl.innerHTML = originalText;
       }
     });
 
     noResults.style.display = hasVisible || term === '' ? 'none' : 'block';
   });
 
-  // Category Filter logic
   const pills = document.querySelectorAll('.filter-pill');
   pills.forEach(pill => {
     pill.addEventListener('click', () => {
-      // Manage active states
       pills.forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
       
-      // Clear search visually and logically
       searchInput.value = '';
       allCards.forEach(c => {
          const n = c.querySelector('.item-name');
-         n.innerHTML = n.textContent; // clear highlight
+         n.innerHTML = n.textContent;
       });
 
       const category = pill.getAttribute('data-cat');
@@ -682,11 +803,10 @@ body {
         }
       });
       noResults.style.display = 'none';
-      
-      // Scroll to top of menu smoothly
       document.querySelector('.controls-wrap').scrollIntoView({behavior: 'smooth'});
     });
   });
+
 </script>
 
 </body>
